@@ -1,70 +1,77 @@
-# Bridgetown Website README
+This is a prototype of BridgetownRB for evaluation purposes.
 
-Welcome to your new Bridgetown website! You can update this README file to provide additional context and setup information for yourself or other contributors.
+Notes on setting up the project:
 
-## Table of Contents
+### Documentation
+The documentation is for fairly simple use cases; often, I had trouble finding the thing I needed.
 
-- [Prerequisites](#prerequisites)
-- [Install](#install)
-- [Development](#development)
-- [Commands](#commands)
-- [Deployment](#deployment)
-- [Contributing](#contributing)
+### Structure
+The _pages directory isn't included out of the box, which made me
+a bit confused about where pages were supposed to go initially.
 
-## Prerequisites
+### Template language
+It uses liquid by default but swapping in erb seems trivial
 
-- [GCC](https://gcc.gnu.org/install/)
-- [Make](https://www.gnu.org/software/make/)
-- [Ruby](https://www.ruby-lang.org/en/downloads/)
-  - `>= 2.7`
-- [Bridgetown Gem](https://rubygems.org/gems/bridgetown)
-  - `gem install bridgetown -N`
-- [Node](https://nodejs.org)
-  - `>= 12`
-- [Yarn](https://yarnpkg.com)
+### Asset Pipeline
+This took awhile to figure out, but seems more because of my 
+lack of understanding.
 
-## Install
+I am using the USWDS 3.0.4 beta package.
 
-```sh
-cd bridgetown-site-folder
-bundle install && yarn install
-```
-> Learn more: [Bridgetown Getting Started Documentation](https://www.bridgetownrb.com/docs/).
+Steps to get it to work:
+* Installing the USWDS and the compile packages 
 
-## Development
+[Gulpfile](../gulpfile.js) here
 
-To start your site in development mode, run `bin/bridgetown start` and navigate to [localhost:4000](https://localhost:4000/)!
-
-Use a [theme](https://github.com/topics/bridgetown-theme) or add some [plugins](https://www.bridgetownrb.com/plugins/) to get started quickly.
-
-### Commands
-
-```sh
-# running locally
-bin/bridgetown start
-
-# build & deploy to production
-bin/bridgetown deploy
-
-# load the site up within a Ruby console (IRB)
-bin/bridgetown console
+``` bash
+$ yarn add @uswds/uswds @uswds/compile
+$ touch gulpfile.js
+$ yarn gulp init
 ```
 
-> Learn more: [Bridgetown CLI Documentation](https://www.bridgetownrb.com/docs/command-line-usage)
+* Wiring it in
 
-## Deployment
+Added:
+`import "@uswds/uswds"` to [index.js](./frontend/javascript/index.js)
 
-You can deploy Bridgetown sites on hosts like Render or Vercel as well as tranditional web servers by simply building and copying the output folder to your HTML root.
+Created [uswds-settings.scss](./frontend/styles/uswds-settings.scss) with:
+```scss
+$theme-font-path: "../uswds/fonts";
+$theme-image-path: "../uswds/img";
 
-> Read the [Bridgetown Deployment Documentation](https://www.bridgetownrb.com/docs/deployment) for more information.
+$theme-show-notifications: false;
 
-## Contributing
+@import 'uswds';
+```
 
-If repo is on GitHub:
+Changed:
+[index.scss](./frontend/styles/index.scss) to just 
+```scss
+@import "uswds-settings.scss";
+@import '../_theme/styles.scss';
 
-1. Fork it
-2. Clone the fork using `git clone` to your local development machine.
-3. Create your feature branch (`git checkout -b my-new-feature`)
-4. Commit your changes (`git commit -am 'Add some feature'`)
-5. Push to the branch (`git push origin my-new-feature`)
-6. Create a new Pull Request
+[stles.scss](./frontend/_theme/styles.scss) to just
+```scss
+@import 'uswds-theme-general';
+@import 'uswds-theme-typography';
+@import 'uswds-theme-spacing';
+@import 'uswds-theme-color';
+@import 'uswds-theme-utilities';
+```
+I also added the @uswds/uswds packages to `webpack.defaults.js` 
+includePaths
+
+``` bash
+        sassOptions: {
+          fiber: false,
+          includePaths: [
+            path.resolve(rootDir, "src/_components"),
+            "./node_modules/@uswds/uswds/packages"
+          ],
+```
+I probably then ran `gulp compile` again to get it all working! (It won't hurt even if it's unnecessary -- I just don't remember exactly)
+```bash
+$ yarn gulp compile
+``` 
+
+The image path is `/images/uswds/img/IMG_NAME.png`

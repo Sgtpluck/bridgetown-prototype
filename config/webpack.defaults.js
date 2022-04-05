@@ -61,7 +61,8 @@ const cssRules = {
         sassOptions: {
           fiber: false,
           includePaths: [
-            path.resolve(rootDir, "src/_components")
+            path.resolve(rootDir, "src/_components"),
+            "./node_modules/@uswds/uswds/packages"
           ],
         },
       },

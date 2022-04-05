@@ -1,0 +1,4 @@
+.usa-banner__button::after {
+  -webkit-mask: url("../images/uswds/img/usa-icons/expand_more.svg") no-repeat center/contain;
+  mask: url("../images/uswds/img/usa-icons/expand_more.svg") no-repeat center/contain;
+;}

@@ -1,3 +1,4 @@
+import "@uswds/uswds"
 import "index.scss"
 
 // Import all JavaScript & CSS files from src/_components
