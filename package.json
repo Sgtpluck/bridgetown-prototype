@@ -5,8 +5,9 @@
   "scripts": {
     "webpack-build": "webpack --mode production",
     "webpack-dev": "webpack --mode development -w",
-    "federalist": "npm run federalist:build && npm run federalist:copy",
-    "federalist:build": "bin/bridgetown deploy",
+    "setup-ruby": "gem install bundler && bundle",
+    "federalist": "npm run setup-ruby && npm run federalist:build && npm run federalist:copy",
+    "federalist:build": "bundle exec bin/bridgetown deploy",
     "federalist:copy": "mkdir -p _site && rm -rf _site/* && cp -r output/* _site/"
   },
   "devDependencies": {
