@@ -4,7 +4,10 @@
   "private": true,
   "scripts": {
     "webpack-build": "webpack --mode production",
-    "webpack-dev": "webpack --mode development -w"
+    "webpack-dev": "webpack --mode development -w",
+    "federalist": "npm run federalist:build && npm run federalist:copy",
+    "federalist:build": "bin/bridgetown deploy",
+    "federalist:copy": "mkdir -p _site && rm -rf _site/* && cp -r output/* _site/"
   },
   "devDependencies": {
     "@uswds/compile": "^1.0.0-beta.2",
