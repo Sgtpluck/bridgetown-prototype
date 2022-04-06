@@ -1,0 +1,19 @@
+books:
+  - name: The Anomaly
+    author: Herve Le Tellier
+    value: anomaly
+    desc: |-
+      A strange and unsettling philosophical thriller.
+  - name: The Committed
+    author: Viet Thanh Nguyen
+    value: committed
+    desc: |-
+      A sprawling story about a Vietnamese ex-communist spy
+      trying his hand at being a drug dealer in Paris.
+  - name: While We Were Dating
+    author: Jasmine Guillory
+    value: dating
+    desc: |-
+      A low-key romance novel where the Happy Ever After is
+      visible the whole time, but who cares, it's nice to have
+      nice things.

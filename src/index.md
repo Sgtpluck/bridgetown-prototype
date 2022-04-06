@@ -6,7 +6,11 @@ layout: default
 
 ## This is a Bridgetown Prototype 
 
-{% render "link_to_form" %}
+<a 
+  class="usa-button usa-button--base"
+  href="{% link _pages/form.md %}">
+  Check out this form
+</a>
 
 
 
