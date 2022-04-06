@@ -1,8 +1,8 @@
 ---
 permalinks: ./results
-layout: default
+layout: page
+title: Survey Results
 ---
-
 <h2 id="books-read">You read these books!</h2>
 <h2 id="no-books"> You read no books. </h2>
 <ul class="usa-card-group" id="all-books">
@@ -20,7 +20,6 @@ layout: default
             />
           </div>
         </div>
-
         <div class="usa-card__body">
           <p>{{ book.desc }}</p>
         </div>

@@ -1,12 +1,10 @@
 ---
 # Feel free to add content and custom Front Matter to this file.
 permalinks: ./form
-layout: default
+layout: page 
+title: Book Survey
 ---
-
-<p>What books have you read recently???</p>
-
-<section class="usa-section">
+<section>
   <form id="books"
     class="usa-form usa-form--large"
     action="/results"
@@ -30,10 +28,7 @@ layout: default
           >
         </div>
       {% endfor %}
-
-        
     </fieldset>
-
     <div class="grid-row">
       <input class="usa-button grid-col-auto" type="submit" value="Submit">
     </div>

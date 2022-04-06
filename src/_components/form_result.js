@@ -1,11 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const books = () => {
-    return new URL(window.location.href)
-      .searchParams
-      .getAll("books");
-  }
+  const url = new URL(window.location.href)
+  if (!url.pathname.includes('/results')) return 
 
-  if (books().length === 0) {
+  const books = url.searchParams.getAll("books");
+
+  if (books.length === 0) {
     document
       .getElementById("books-read")
       .classList.add("display-none");
@@ -22,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .getElementById("all-books")
       .children)
       .forEach((book) => {
-        if (!books().includes(book.id)) {
+        if (!books.includes(book.id)) {
           book.classList.add("display-none");
         }
       });
