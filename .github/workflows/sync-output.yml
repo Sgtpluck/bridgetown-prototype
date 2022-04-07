@@ -1,0 +1,39 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: sync output 
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    name: Sync output to _site
+    runs-on: ubuntu-latest
+    environment: stage
+    steps:
+
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          # bundler-cache automatically installs gems
+          bundler-cache: true
+          cache-version: 1
+        
+      - name: Package site
+        run: bundle exec ./bin/bridgetown start
+
+      - name: Create and sync _site
+        run: mkdir -p _site && rm -rf _site && cp -r output/* _site/"
+        
+      - name: Push to production branch
+        run: |
+          git commit -am "Automated report"
+          git push origin/prod

@@ -4,12 +4,8 @@
   "private": true,
   "scripts": {
     "webpack-build": "webpack --mode production",
-    "webpack-dev": "webpack --mode development -w",
-    "setup-ruby": "gem install bundler && bundle",
-    "federalist": "npm run setup-ruby && npm run federalist:build && npm run federalist:copy",
-    "federalist:build": "bundle exec bin/bridgetown deploy",
-    "federalist:copy": "mkdir -p _site && rm -rf _site/* && cp -r output/* _site/"
-  },
+    "webpack-dev": "webpack --mode development -w"
+    },
   "devDependencies": {
     "@uswds/compile": "^1.0.0-beta.2",
     "css-loader": "^4.3.0",
