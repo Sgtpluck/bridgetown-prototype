@@ -14,10 +14,16 @@ jobs:
     name: Sync output to _site
     runs-on: ubuntu-latest
     environment: stage
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    defaults:
+      run:
+        shell: bash
     steps:
 
       - uses: actions/checkout@v2
         with:
+          ref: main
           fetch-depth: 2
 
       - name: Set up Ruby
@@ -26,14 +32,25 @@ jobs:
           # bundler-cache automatically installs gems
           bundler-cache: true
           cache-version: 1
+      
+      - name: Install node.js.
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install NPM dependencies.
+        shell: bash
+        run: npm install
         
       - name: Package site
-        run: bundle exec ./bin/bridgetown start
+        run: bundle exec ./bin/bridgetown deploy
 
       - name: Create and sync _site
-        run: mkdir -p _site && rm -rf _site && cp -r output/* _site/"
+        run: mkdir -p _site && cp -r output/* _site/
         
       - name: Push to production branch
         run: |
-          git commit -am "Automated report"
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "no-reply@example.com"
+          git commit -am "Site build"
           git push origin/prod
