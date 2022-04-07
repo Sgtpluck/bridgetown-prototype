@@ -50,7 +50,7 @@ jobs:
         
       - name: Push to production branch
         run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "no-reply@example.com"
+          git config --global user.name "Davida Marion"
+          git config --global user.email "davida.marion@gsa.gov"
           git commit -am "Site build"
-          git push origin/prod
+          git push prod
