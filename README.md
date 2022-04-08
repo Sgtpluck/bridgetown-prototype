@@ -49,6 +49,7 @@ Changed:
 ```scss
 @import "uswds-settings.scss";
 @import '../_theme/styles.scss';
+```
 
 [stles.scss](./frontend/_theme/styles.scss) to just
 ```scss
