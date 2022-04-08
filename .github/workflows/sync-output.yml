@@ -49,8 +49,10 @@ jobs:
         run: mkdir -p _site && cp -r output/* _site/
         
       - name: Push to production branch
-        run: |
-          git config --global user.name "Davida Marion"
-          git config --global user.email "davida.marion@gsa.gov"
-          git commit -am "Site build"
-          git push prod
+        uses: EndBug/add-and-commit@v9
+        with:
+          author_name: Github Actions
+          author_email: mail@example.com
+          message: "Packaging output"
+          push: "--set-upstream origin prod --force"
+          new_branch: prod
