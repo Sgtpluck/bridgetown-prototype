@@ -43,7 +43,7 @@ jobs:
         run: npm install
         
       - name: Package site
-        run: bundle exec ./bin/bridgetown deploy
+        run: BRIDGETOWN_ENV=production bundle exec ./bin/bridgetown deploy
 
       - name: Create and sync _site
         run: mkdir -p _site && cp -r output/* _site/
